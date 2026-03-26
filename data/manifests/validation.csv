@@ -1,0 +1,3 @@
+audio_path,transcript,accent_type,duration_seconds,source_dataset,speaker_id,accent_label
+data\raw\speech_accent_archive\0000_arabic_0_0.wav,please call stella ask her to bring these things with her from the store,arabic,3.0,speech_accent_archive,saa_0000_arabic_0_0,arabic
+data\raw\voxpopuli\asr\en\2019\vp_0001.wav,,european,3.0,voxpopuli,vp_vp_0001,european
