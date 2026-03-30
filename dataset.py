@@ -103,8 +103,7 @@ def _fix_mel_length(mel: np.ndarray, target_frames: int = MAX_FRAMES) -> torch.T
     elif n_frames < target_frames:
         pad = np.zeros((N_MELS, target_frames - n_frames), dtype=mel.dtype)
         mel = np.concatenate([mel, pad], axis=1)
-    return torch.tensor(mel, dtype=torch.float32)
-
+    return mel.clone().detach().float() if isinstance(mel, torch.Tensor) else torch.tensor(mel, dtype=torch.float32)
 
 # ──────────────────────────────────────────────
 # CUSTOM DATASET CLASS
