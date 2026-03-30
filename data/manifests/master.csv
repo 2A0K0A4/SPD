@@ -1,0 +1,26 @@
+audio_path,transcript,accent_type,duration_seconds,source_dataset,speaker_id,accent_label
+data\raw\speech_accent_archive\0000_arabic_0_0.wav,please call stella ask her to bring these things with her from the store,arabic,3.0,speech_accent_archive,saa_0000_arabic_0_0,arabic
+data\raw\speech_accent_archive\0001_egyptian_0_0.wav,please call stella ask her to bring these things with her from the store,arabic,3.0,speech_accent_archive,saa_0001_egyptian_0_0,egyptian
+data\raw\speech_accent_archive\0002_indian_0_0.wav,please call stella ask her to bring these things with her from the store,south_asian,3.0,speech_accent_archive,saa_0002_indian_0_0,indian
+data\raw\speech_accent_archive\0003_chinese_0_0.wav,please call stella ask her to bring these things with her from the store,east_asian,3.0,speech_accent_archive,saa_0003_chinese_0_0,chinese
+data\raw\speech_accent_archive\0004_french_0_0.wav,please call stella ask her to bring these things with her from the store,european,3.0,speech_accent_archive,saa_0004_french_0_0,french
+data\raw\speech_accent_archive\0005_german_0_0.wav,please call stella ask her to bring these things with her from the store,european,3.0,speech_accent_archive,saa_0005_german_0_0,german
+data\raw\speech_accent_archive\0006_spanish_0_0.wav,please call stella ask her to bring these things with her from the store,european,3.0,speech_accent_archive,saa_0006_spanish_0_0,spanish
+data\raw\speech_accent_archive\0007_korean_0_0.wav,please call stella ask her to bring these things with her from the store,east_asian,3.0,speech_accent_archive,saa_0007_korean_0_0,korean
+data\raw\speech_accent_archive\0008_vietnamese_0_0.wav,please call stella ask her to bring these things with her from the store,east_asian,3.0,speech_accent_archive,saa_0008_vietnamese_0_0,vietnamese
+data\raw\speech_accent_archive\0009_arabic_0_0.wav,please call stella ask her to bring these things with her from the store,arabic,3.0,speech_accent_archive,saa_0009_arabic_0_0,arabic
+data\raw\speech_accent_archive\0010_egyptian_0_0.wav,please call stella ask her to bring these things with her from the store,arabic,3.0,speech_accent_archive,saa_0010_egyptian_0_0,egyptian
+data\raw\speech_accent_archive\0011_indian_0_0.wav,please call stella ask her to bring these things with her from the store,south_asian,3.0,speech_accent_archive,saa_0011_indian_0_0,indian
+data\raw\speech_accent_archive\0012_chinese_0_0.wav,please call stella ask her to bring these things with her from the store,east_asian,3.0,speech_accent_archive,saa_0012_chinese_0_0,chinese
+data\raw\speech_accent_archive\0013_french_0_0.wav,please call stella ask her to bring these things with her from the store,european,3.0,speech_accent_archive,saa_0013_french_0_0,french
+data\raw\speech_accent_archive\0014_german_0_0.wav,please call stella ask her to bring these things with her from the store,european,3.0,speech_accent_archive,saa_0014_german_0_0,german
+data\raw\voxpopuli\asr\en\2019\vp_0000.wav,,european,3.0,voxpopuli,vp_vp_0000,european
+data\raw\voxpopuli\asr\en\2019\vp_0001.wav,,european,3.0,voxpopuli,vp_vp_0001,european
+data\raw\voxpopuli\asr\en\2019\vp_0002.wav,,european,3.0,voxpopuli,vp_vp_0002,european
+data\raw\voxpopuli\asr\en\2019\vp_0003.wav,,european,3.0,voxpopuli,vp_vp_0003,european
+data\raw\voxpopuli\asr\en\2019\vp_0004.wav,,european,3.0,voxpopuli,vp_vp_0004,european
+data\raw\voxpopuli\asr\en\2019\vp_0005.wav,,european,3.0,voxpopuli,vp_vp_0005,european
+data\raw\voxpopuli\asr\en\2019\vp_0006.wav,,european,3.0,voxpopuli,vp_vp_0006,european
+data\raw\voxpopuli\asr\en\2019\vp_0007.wav,,european,3.0,voxpopuli,vp_vp_0007,european
+data\raw\voxpopuli\asr\en\2019\vp_0008.wav,,european,3.0,voxpopuli,vp_vp_0008,european
+data\raw\voxpopuli\asr\en\2019\vp_0009.wav,,european,3.0,voxpopuli,vp_vp_0009,european
