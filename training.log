@@ -1,0 +1,177 @@
+2026-03-30 22:44:47,048 [INFO] Using GPU: NVIDIA GeForce GTX 1660 Ti
+2026-03-30 22:44:47,048 [INFO] ============================================================
+2026-03-30 22:44:47,048 [INFO] AI-Based Accent Transcribing System | Phase 3 Training
+2026-03-30 22:44:47,048 [INFO] Model      : openai/whisper-small
+2026-03-30 22:44:47,048 [INFO] Manifest   : data/manifests/master_manifest.csv
+2026-03-30 22:44:47,048 [INFO] Output     : checkpoints/
+2026-03-30 22:44:47,048 [INFO] Epochs     : 10
+2026-03-30 22:44:47,048 [INFO] Batch size : 8  (grad_accum x4)
+2026-03-30 22:44:47,048 [INFO] Device     : cuda
+2026-03-30 22:44:47,048 [INFO] Debug mode : True
+2026-03-30 22:44:47,048 [INFO] ============================================================
+2026-03-30 22:44:47,048 [INFO] Loading model and processor...
+2026-03-30 22:44:52,415 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:52,742 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:52,993 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:53,255 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:53,256 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-30 22:44:53,527 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/audio_tokenizer_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:53,767 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:53,987 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:53,998 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:54,012 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:54,279 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:54,593 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:54,607 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:54,894 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:54,912 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:54,930 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:55,200 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:55,218 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:55,234 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:55,463 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 22:44:55,712 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,019 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/vocab.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:56,034 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/vocab.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,051 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/vocab.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,324 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/tokenizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:56,340 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,356 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,633 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/merges.txt "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:56,645 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/merges.txt "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,662 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/merges.txt "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,894 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/normalizer.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:56,905 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/normalizer.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:56,920 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/normalizer.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:57,145 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/added_tokens.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:57,157 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/added_tokens.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:57,171 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/added_tokens.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:57,393 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/special_tokens_map.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:57,407 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:57,422 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/special_tokens_map.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:57,781 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:44:57,798 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:44:58,028 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-30 22:44:58,274 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/xet-read-token/973afd24965f72e36ca33b3055d56a652f456b4d "HTTP/1.1 200 OK"
+2026-03-30 22:45:38,709 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/generation_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:45:38,728 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/generation_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:45:38,739 [INFO] HTTP Request: GET https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/generation_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:45:40,092 [INFO] Building dataloaders...
+2026-03-30 22:48:11,419 [INFO] Using GPU: NVIDIA GeForce GTX 1660 Ti
+2026-03-30 22:48:11,419 [INFO] ============================================================
+2026-03-30 22:48:11,419 [INFO] AI-Based Accent Transcribing System | Phase 3 Training
+2026-03-30 22:48:11,419 [INFO] Model      : openai/whisper-small
+2026-03-30 22:48:11,419 [INFO] Manifest   : data/manifests/master.csv
+2026-03-30 22:48:11,419 [INFO] Output     : checkpoints/
+2026-03-30 22:48:11,419 [INFO] Epochs     : 10
+2026-03-30 22:48:11,419 [INFO] Batch size : 8  (grad_accum x4)
+2026-03-30 22:48:11,419 [INFO] Device     : cuda
+2026-03-30 22:48:11,419 [INFO] Debug mode : True
+2026-03-30 22:48:11,419 [INFO] ============================================================
+2026-03-30 22:48:11,419 [INFO] Loading model and processor...
+2026-03-30 22:48:11,708 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:11,932 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:12,149 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:12,149 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-30 22:48:12,374 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:12,595 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/audio_tokenizer_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:12,819 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:13,051 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:48:13,065 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:48:13,304 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:13,524 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:48:13,535 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:48:13,758 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:48:13,773 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:48:13,996 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:48:14,009 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:48:14,237 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 22:48:14,461 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-30 22:48:14,822 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:48:14,833 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:48:15,060 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-30 22:48:15,528 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/generation_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:48:15,542 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/generation_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:48:16,116 [INFO] Building dataloaders...
+2026-03-30 22:55:56,073 [INFO] Using GPU: NVIDIA GeForce GTX 1660 Ti
+2026-03-30 22:55:56,074 [INFO] ============================================================
+2026-03-30 22:55:56,074 [INFO] AI-Based Accent Transcribing System | Phase 3 Training
+2026-03-30 22:55:56,074 [INFO] Model      : openai/whisper-small
+2026-03-30 22:55:56,074 [INFO] Manifest   : data/manifests/master.csv
+2026-03-30 22:55:56,074 [INFO] Output     : checkpoints/
+2026-03-30 22:55:56,074 [INFO] Epochs     : 10
+2026-03-30 22:55:56,074 [INFO] Batch size : 8  (grad_accum x4)
+2026-03-30 22:55:56,074 [INFO] Device     : cuda
+2026-03-30 22:55:56,074 [INFO] Debug mode : True
+2026-03-30 22:55:56,074 [INFO] ============================================================
+2026-03-30 22:55:56,074 [INFO] Loading model and processor...
+2026-03-30 22:55:56,329 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:56,606 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:56,827 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:57,043 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:57,322 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/audio_tokenizer_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:57,322 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-30 22:55:57,538 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:57,833 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:55:57,841 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:55:58,140 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:58,364 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:55:58,376 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:55:58,604 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:55:58,616 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:55:58,839 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:55:58,848 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:55:59,166 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 22:55:59,392 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-30 22:55:59,780 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:55:59,791 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 22:56:00,086 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-30 22:56:00,526 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/generation_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 22:56:00,538 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/generation_config.json "HTTP/1.1 200 OK"
+2026-03-30 22:56:01,103 [INFO] Building dataloaders...
+2026-03-30 22:56:01,104 [WARNING] DEBUG MODE: truncating loaders to first 5 batches each
+2026-03-30 22:56:01,105 [INFO] 
+──────────────────────────────────────────────────
+2026-03-30 22:56:01,105 [INFO] EPOCH 1/2
+2026-03-30 22:56:01,105 [INFO] ──────────────────────────────────────────────────
+2026-03-30 23:00:04,478 [INFO] Using GPU: NVIDIA GeForce GTX 1660 Ti
+2026-03-30 23:00:04,478 [INFO] ============================================================
+2026-03-30 23:00:04,478 [INFO] AI-Based Accent Transcribing System | Phase 3 Training
+2026-03-30 23:00:04,478 [INFO] Model      : openai/whisper-small
+2026-03-30 23:00:04,478 [INFO] Manifest   : data/manifests/master.csv
+2026-03-30 23:00:04,478 [INFO] Output     : checkpoints/
+2026-03-30 23:00:04,478 [INFO] Epochs     : 10
+2026-03-30 23:00:04,478 [INFO] Batch size : 8  (grad_accum x4)
+2026-03-30 23:00:04,478 [INFO] Device     : cuda
+2026-03-30 23:00:04,478 [INFO] Debug mode : True
+2026-03-30 23:00:04,478 [INFO] ============================================================
+2026-03-30 23:00:04,478 [INFO] Loading model and processor...
+2026-03-30 23:00:04,823 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:05,130 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:05,131 [WARNING] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-30 23:00:05,348 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.json "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:05,570 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/chat_template.jinja "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:05,792 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/audio_tokenizer_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:06,017 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:06,234 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 23:00:06,244 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 23:00:06,517 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/processor_config.json "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:06,771 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/preprocessor_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 23:00:06,784 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/preprocessor_config.json "HTTP/1.1 200 OK"
+2026-03-30 23:00:07,076 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 23:00:07,087 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 23:00:07,310 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 23:00:07,321 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-30 23:00:07,548 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-30 23:00:07,767 [INFO] HTTP Request: GET https://huggingface.co/api/models/openai/whisper-small/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-30 23:00:08,126 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 23:00:08,138 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/config.json "HTTP/1.1 200 OK"
+2026-03-30 23:00:08,365 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/model.safetensors "HTTP/1.1 302 Found"
+2026-03-30 23:00:08,765 [INFO] HTTP Request: HEAD https://huggingface.co/openai/whisper-small/resolve/main/generation_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-30 23:00:08,774 [INFO] HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/openai/whisper-small/973afd24965f72e36ca33b3055d56a652f456b4d/generation_config.json "HTTP/1.1 200 OK"
+2026-03-30 23:00:09,330 [INFO] Building dataloaders...
+2026-03-30 23:00:09,330 [WARNING] DEBUG MODE: truncating loaders to first 5 batches each
+2026-03-30 23:00:09,332 [INFO] 
+──────────────────────────────────────────────────
+2026-03-30 23:00:09,332 [INFO] EPOCH 1/2
+2026-03-30 23:00:09,332 [INFO] ──────────────────────────────────────────────────

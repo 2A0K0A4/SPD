@@ -36,7 +36,7 @@ def extract_log_mel(audio: np.ndarray) -> torch.Tensor:
     """
     # Pad or trim to exactly 30 seconds
     audio = whisper.pad_or_trim(audio)
-
+    audio = audio.astype(np.float32)  # ensure float32 — whisper requires this
     # Generate log-mel spectrogram (shape: [80, 3000])
     mel = whisper.log_mel_spectrogram(audio)
 
