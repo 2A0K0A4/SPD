@@ -220,7 +220,7 @@ This report provides a comprehensive analysis of the accent recognition dataset 
     
     def run(self) -> None:
         """Generate complete statistics report"""
-        print("\n" + "🎵 DATASET STATISTICS - PHASE 3.4 🎵".center(60))
+        print("\n" + "DATASET STATISTICS - PHASE 3.4".center(60))
         print("="*60)
         
         print("Calculating statistics...")

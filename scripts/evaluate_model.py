@@ -168,7 +168,7 @@ class ModelEvaluator:
     
     def run(self) -> None:
         """Run evaluation pipeline"""
-        print("\n" + "🎵 MODEL EVALUATION - PHASE 5 🎵".center(60))
+        print("\n" + "MODEL EVALUATION - PHASE 5".center(60))
         print("="*60)
         
         print(f"Test samples directory: {self.test_samples_dir}")

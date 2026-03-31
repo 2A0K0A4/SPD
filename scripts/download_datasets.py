@@ -158,7 +158,7 @@ class DatasetDownloadManager:
     
     def run(self) -> None:
         """Run dataset download manager"""
-        print("\n" + "🎵 ACCENT RECOGNITION - DATASET DOWNLOAD MANAGER 🎵".center(60))
+        print("\n" + "ACCENT RECOGNITION - DATASET DOWNLOAD MANAGER".center(60))
         print("="*60)
         
         print("""

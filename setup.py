@@ -23,7 +23,7 @@ def run_command(cmd, description):
 
 def main():
     """Quick setup"""
-    print("\n" + "🎵 QUICK SETUP - ACCENT TRANSCRIBER 🎵".center(60))
+    print("\n" + "QUICK SETUP - ACCENT TRANSCRIBER".center(60))
     print("="*60)
     
     # Check Python version

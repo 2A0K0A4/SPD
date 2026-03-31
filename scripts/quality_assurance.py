@@ -214,7 +214,7 @@ class DataQualityAssurance:
     
     def run(self) -> None:
         """Run complete QA pipeline"""
-        print("\n" + "🎵 DATA QUALITY ASSURANCE - PHASE 4 🎵".center(60))
+        print("\n" + "DATA QUALITY ASSURANCE - PHASE 4".center(60))
         print("="*60)
         
         self.validate_file_existence()

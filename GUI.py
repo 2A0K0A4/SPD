@@ -178,11 +178,15 @@ class AccentTranscriberApp(QWidget):
         self.browse_btn.setEnabled(True)
 
 
-# ----------------
-# Run app
-# ----------------
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     window = AccentTranscriberApp()
     window.show()
     sys.exit(app.exec_())
+
+
+# ----------------
+# Run app
+# ----------------
+if __name__ == "__main__":
+    main()

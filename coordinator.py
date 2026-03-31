@@ -42,7 +42,7 @@ class ProjectCoordinator:
     
     def print_menu(self) -> None:
         """Print main menu"""
-        self.print_header("🎵 ACCENT TRANSCRIBER - PROJECT COORDINATOR 🎵")
+        self.print_header("ACCENT TRANSCRIBER - PROJECT COORDINATOR")
         print("\nAVAILABLE PHASES:\n")
         
         for phase_num, phase_name in self.phases.items():
@@ -218,19 +218,24 @@ See docs/IMPLEMENTATION_GUIDE.md for more details.
             script_path = self.scripts_dir / script
             
             if not script_path.exists():
-                print(f"✗ Script not found: {script_path}")
+                print(f"Script not found: {script_path}")
                 return False
             
             print(f"\nRunning: {script}")
             print("-" * 70)
             
+            env = os.environ.copy()
+            env["PYTHONIOENCODING"] = "utf-8"
+            env["PYTHONUTF8"] = "1"
+            
             result = subprocess.run(
-                ["python", str(script_path)],
-                cwd=self.project_root
+                [sys.executable, str(script_path)],
+                cwd=self.project_root,
+                env=env
             )
             
             if result.returncode != 0:
-                print(f"✗ Script failed: {script}")
+                print(f"Script failed: {script}")
                 return False
             
             print("-" * 70)

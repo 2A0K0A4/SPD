@@ -5,16 +5,19 @@ Coordinates between different modules
 
 import os
 import sys
+import subprocess
 from pathlib import Path
 
-# Add src to path
+# Add src and project root to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
+sys.path.insert(0, str(Path(__file__).parent))
+PROJECT_ROOT = Path(__file__).parent
 
 
 def main():
     """Main entry point"""
     print("""
-    🎵 ACCENT TRANSCRIBER 🎵
+    ACCENT TRANSCRIBER
     
     Choose an option:
     1. Run GUI Application
@@ -30,17 +33,20 @@ def main():
     if choice == "1":
         # Run GUI
         try:
-            from app.GUI import main as run_gui
+            from GUI import main as run_gui
             run_gui()
         except ImportError:
-            print("✗ GUI module not found. Check src/app/GUI.py")
+            print("GUI module not found. Check GUI.py")
     
     elif choice == "2":
         # Run data processing
         print("Running data processing pipeline...")
-        os.system("python scripts/organize_datasets.py")
-        os.system("python scripts/generate_statistics.py")
-        os.system("python scripts/split_data.py")
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        env["PYTHONUTF8"] = "1"
+        subprocess.run([sys.executable, str(PROJECT_ROOT / "scripts" / "organize_datasets.py")], cwd=PROJECT_ROOT, env=env)
+        subprocess.run([sys.executable, str(PROJECT_ROOT / "scripts" / "generate_statistics.py")], cwd=PROJECT_ROOT, env=env)
+        subprocess.run([sys.executable, str(PROJECT_ROOT / "scripts" / "split_data.py")], cwd=PROJECT_ROOT, env=env)
     
     elif choice == "3":
         # Run training
@@ -50,12 +56,18 @@ def main():
     elif choice == "4":
         # Run evaluation
         print("Running model evaluation...")
-        os.system("python scripts/evaluate_model.py")
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        env["PYTHONUTF8"] = "1"
+        subprocess.run([sys.executable, str(PROJECT_ROOT / "scripts" / "evaluate_model.py")], cwd=PROJECT_ROOT, env=env)
     
     elif choice == "5":
         # Run QA
         print("Running quality assurance...")
-        os.system("python scripts/quality_assurance.py")
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        env["PYTHONUTF8"] = "1"
+        subprocess.run([sys.executable, str(PROJECT_ROOT / "scripts" / "quality_assurance.py")], cwd=PROJECT_ROOT, env=env)
     
     elif choice == "0":
         print("Goodbye!")

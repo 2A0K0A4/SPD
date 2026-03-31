@@ -1,6 +1,13 @@
 # nlp_postprocessor.py
 
-import language_tool_python
+import warnings
+
+try:
+    import language_tool_python
+    _HAS_LANGUAGE_TOOL = True
+except ImportError:
+    language_tool_python = None
+    _HAS_LANGUAGE_TOOL = False
 
 class NLPPostProcessor:
     # Example accent-specific corrections
@@ -15,10 +22,15 @@ class NLPPostProcessor:
     }
 
     def __init__(self):
-        self.tool = language_tool_python.LanguageTool('en-US')
+        if _HAS_LANGUAGE_TOOL:
+            self.tool = language_tool_python.LanguageTool('en-US')
+        else:
+            self.tool = None
 
     def correct_grammar(self, text):
         """Use language-tool-python to correct grammar mistakes."""
+        if not self.tool:
+            return text
         matches = self.tool.check(text)
         corrected = language_tool_python.utils.correct(text, matches)
         return corrected

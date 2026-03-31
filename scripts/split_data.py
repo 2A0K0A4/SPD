@@ -145,7 +145,7 @@ class DataSplitter:
     
     def run(self) -> None:
         """Run data splitting pipeline"""
-        print("\n" + "🎵 DATA SPLITTING - PHASE 3.3 🎵".center(60))
+        print("\n" + "DATA SPLITTING - PHASE 3.3".center(60))
         print("="*60)
         
         # Validate

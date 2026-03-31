@@ -272,7 +272,7 @@ class DatasetOrganizer:
     
     def run(self) -> None:
         """Run dataset organization"""
-        print("\n" + "🎵 DATASET ORGANIZATION - PHASE 3.1 & 3.2 🎵".center(60))
+        print("\n" + "DATASET ORGANIZATION - PHASE 3.1 & 3.2".center(60))
         print("="*60)
         
         print("Processing datasets...")
