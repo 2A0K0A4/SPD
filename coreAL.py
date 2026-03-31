@@ -26,44 +26,33 @@ class TranscriptionWorker(QThread):
 
     def run(self):
         try:
-            self.status.emit("Loading audio file...")
+            self.status.emit("Loading Whisper model...")
             self.progress.emit(10)
 
-            # -----------------------------------
-            # Ammar's transcription (NOT READY)
-            # -----------------------------------
-            # result = self.transcriber.transcribe(
-            #     self.file_path,
-            #     progress_callback=self.update_progress
-            # )
+            import whisper
+            model = whisper.load_model("small")
 
-            # TEMP DUMMY RESULT (for testing)
-            result = {
+            self.status.emit("Transcribing audio...")
+            self.progress.emit(20)
+
+            result = model.transcribe(self.file_path, language="en", task="transcribe", fp16=False)
+            # Reformat to match expected structure
+            formatted = {
                 "segments": [
-                    {"start": 0, "end": 5, "text": "hello my name is ahmed"},
-                    {"start": 5, "end": 10, "text": "ze importance of technology is big"}
+                    {"start": seg["start"], "end": seg["end"], "text": seg["text"]}
+                    for seg in result["segments"]
                 ]
             }
 
-            # Simulate progress
-            for i in range(10, 80, 10):
-                self.progress.emit(i)
-                self.status.emit(f"Processing... {i}%")
-                time.sleep(0.2)
-
-            # -----------------------------------
-            # NLP POST-PROCESSING (Phase 4)
-            # -----------------------------------
             self.status.emit("Applying NLP corrections...")
             self.progress.emit(85)
 
             nlp = NLPPostProcessor()
-            result = nlp.process(result)
+            formatted = nlp.process(formatted)
 
-            # -----------------------------------
             self.progress.emit(100)
             self.status.emit("Done!")
-            self.finished.emit(result)
+            self.finished.emit(formatted)
 
         except Exception as e:
             self.error.emit(str(e))
