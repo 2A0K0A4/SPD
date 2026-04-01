@@ -1,0 +1,72 @@
+# Dataset files (large)
+data/raw/
+data/processed/
+
+# Model files
+models/*.pt
+models/*.bin
+models/*.pth
+*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+accent-env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Cache
+*.cache
+cache/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Large test files
+tests/results/
+*.wav
+*.mp3
+*.flac

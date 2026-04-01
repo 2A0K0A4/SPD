@@ -1,0 +1,22 @@
+# Phase 3 — Training Pipeline Requirements
+# AI-Based Accent Transcribing System | University of Sharjah SDP
+
+# Core ML
+torch>=2.1.0
+transformers>=4.39.0
+datasets>=2.18.0
+
+# Audio
+librosa>=0.10.0
+soundfile>=0.12.1
+
+# Data
+numpy>=1.24.0
+pandas>=2.1.0
+
+# AWS (for sagemaker_job.py — install locally only, not needed inside the container)
+sagemaker>=2.200.0
+boto3>=1.34.0
+
+# Utilities
+tqdm>=4.66.0

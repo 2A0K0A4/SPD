@@ -1,0 +1,7 @@
+{
+  "arabic": ["arabic", "egyptian", "gulf", "levantine", "moroccan", "iraqi", "saudi", "syrian", "lebanese", "palestinian", "jordanian", "tunisian", "algerian", "sudanese"],
+  "south_asian": ["indian", "pakistani", "bangladeshi", "nepali", "sri lankan", "sikh", "telugu", "tamil", "hindi"],
+  "east_asian": ["chinese", "mandarin", "cantonese", "japanese", "korean", "vietnamese", "thai", "singaporean", "taiwanese"],
+  "european": ["french", "german", "spanish", "italian", "russian", "polish", "dutch", "portuguese", "greek", "czech", "hungarian", "scandinavian", "swedish", "norwegian", "danish", "romanian"],
+  "north_american": ["us english", "american", "canadian", "english"]
+}
