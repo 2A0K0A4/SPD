@@ -35,7 +35,7 @@ class TranscriptionWorker(QThread):
             self.status.emit("Transcribing audio...")
             self.progress.emit(20)
 
-            result = model.transcribe(self.file_path, language="en", task="transcribe", fp16=False)
+            result = model.transcribe(self.file_path, language="en", task="transcribe", fp16=False) #ff
             # Reformat to match expected structure
             formatted = {
                 "segments": [
