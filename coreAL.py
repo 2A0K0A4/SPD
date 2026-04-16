@@ -1,11 +1,10 @@
-
-
 # coreAL.py
 
 import os
 import warnings
 warnings.filterwarnings("ignore", message="TypedStorage is deprecated")
 import librosa
+import soundfile as sf
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 
@@ -14,6 +13,7 @@ try:
     from nlp_postprocessor import NLPPostProcessor
 except ImportError:
     NLPPostProcessor = None
+
 
 # ----------------------------
 # Transcription Worker Thread
@@ -34,7 +34,6 @@ class TranscriptionWorker(QThread):
             self.progress.emit(10)
 
             import whisper
-            # Force CPU to avoid GPU/DLL issues
             model = whisper.load_model("small", device="cpu")
 
             self.status.emit("Transcribing audio...")
@@ -75,7 +74,6 @@ def validate_audio_file(parent, file_path):
         QMessageBox.warning(parent, "Invalid File", f"Please select {valid_exts}")
         return False
     try:
-        # Fixed warning: use path instead of filename
         duration = librosa.get_duration(path=file_path)
         if duration > 600:
             QMessageBox.warning(parent, "File Too Long", "Please select an audio file under 10 minutes.")
@@ -113,6 +111,16 @@ def export_srt(parent, result):
                 start = format_srt_time(seg["start"])
                 end = format_srt_time(seg["end"])
                 f.write(f"{i}\n{start} --> {end}\n{seg['text'].strip()}\n\n")
+
+
+# ----------------------------
+# Save recording helper
+# ----------------------------
+def save_recording(data, samplerate, filename):
+    os.makedirs("recordings", exist_ok=True)
+    path = os.path.join("recordings", filename)
+    sf.write(path, data, samplerate)
+    return path
 
 
 # ----------------------------
