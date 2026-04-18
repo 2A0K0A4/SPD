@@ -186,16 +186,17 @@ class AccentTranscriberApp(QWidget):
             if self.recording:
                 self.audio_data.append(indata.copy())
 
-        self.stream = sd.InputStream(device=self.selected_device, channels=1, samplerate=44100, callback=callback)
+        self.stream = sd.InputStream(device=self.selected_device, channels=1, samplerate=16000, callback=callback)
         self.stream.start()
 
     def save_audio_file(self):
-        self.stream.stop()
-        self.stream.close()
+        if hasattr(self, 'stream') and self.stream:
+            self.stream.stop()
+            self.stream.close()
 
         data = np.concatenate(self.audio_data, axis=0)
         filename = f"recording_{len(os.listdir(RECORDINGS_FOLDER))+1}.wav"
-        self.file_path = save_recording(data, 44100, filename)
+        self.file_path = save_recording(data, 16000, filename)
         self.browse_btn.setText(filename)
 
     # FILE SELECT
