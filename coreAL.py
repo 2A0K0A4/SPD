@@ -1,28 +1,18 @@
-# coreAL.py
-
 import os
 import warnings
-warnings.filterwarnings("ignore", message="TypedStorage is deprecated")
+warnings.filterwarnings("ignore")
+
 import librosa
-import soundfile as sf
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
-
-# Optional NLP post-processor if you have it
-try:
-    from nlp_postprocessor import NLPPostProcessor
-except ImportError:
-    NLPPostProcessor = None
+import soundfile as sf
 
 
-# ----------------------------
-# Transcription Worker Thread
-# ----------------------------
 class TranscriptionWorker(QThread):
-    progress = pyqtSignal(int)   # 0-100 %
-    status = pyqtSignal(str)     # status messages
-    finished = pyqtSignal(dict)  # final result
-    error = pyqtSignal(str)      # error messages
+    progress = pyqtSignal(int)
+    status = pyqtSignal(str)
+    finished = pyqtSignal(dict)
+    error = pyqtSignal(str)
 
     def __init__(self, file_path):
         super().__init__()
@@ -30,14 +20,17 @@ class TranscriptionWorker(QThread):
 
     def run(self):
         try:
-            self.status.emit("Loading Whisper model...")
+            self.status.emit("Loading model...")
             self.progress.emit(10)
 
             import whisper
-            model = whisper.load_model("small", device="cpu")
+            import torch
 
-            self.status.emit("Transcribing audio...")
-            self.progress.emit(30)
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+            model = whisper.load_model("base", device=device)
+
+            self.status.emit("Transcribing...")
+            self.progress.emit(40)
 
             result = model.transcribe(self.file_path, fp16=False)
 
@@ -48,84 +41,54 @@ class TranscriptionWorker(QThread):
                 ]
             }
 
-            if NLPPostProcessor:
-                self.status.emit("Applying NLP corrections...")
-                self.progress.emit(80)
-                try:
-                    nlp = NLPPostProcessor()
-                    formatted = nlp.process(formatted)
-                except Exception as nlp_e:
-                    print(f"NLP skipping: {nlp_e}")
-
             self.progress.emit(100)
-            self.status.emit("Done!")
+            self.status.emit("Done")
+
             self.finished.emit(formatted)
 
         except Exception as e:
             self.error.emit(str(e))
 
 
-# ----------------------------
-# File Validation
-# ----------------------------
 def validate_audio_file(parent, file_path):
-    valid_exts = (".wav", ".mp3", ".m4a")
-    if not file_path.lower().endswith(valid_exts):
-        QMessageBox.warning(parent, "Invalid File", f"Please select {valid_exts}")
+    if not file_path.lower().endswith((".wav", ".mp3", ".m4a")):
+        QMessageBox.warning(parent, "Invalid File", "Use wav/mp3/m4a")
         return False
+
     try:
         duration = librosa.get_duration(path=file_path)
         if duration > 600:
-            QMessageBox.warning(parent, "File Too Long", "Please select an audio file under 10 minutes.")
+            QMessageBox.warning(parent, "Too long", "Max 10 minutes")
             return False
-    except Exception:
-        QMessageBox.warning(parent, "Error", "Unable to read audio file.")
+    except:
+        QMessageBox.warning(parent, "Error", "Cannot read file")
         return False
+
     return True
 
 
-# ----------------------------
-# Export TXT
-# ----------------------------
 def export_txt(parent, result):
     if not result:
-        QMessageBox.warning(parent, "Error", "Nothing to export.")
         return
-    file_path, _ = QFileDialog.getSaveFileName(parent, "Save TXT", "", "Text Files (*.txt)")
-    if file_path:
-        with open(file_path, "w", encoding="utf-8") as f:
+    path, _ = QFileDialog.getSaveFileName(parent, "Save TXT", "", "*.txt")
+    if path:
+        with open(path, "w", encoding="utf-8") as f:
             for seg in result["segments"]:
-                f.write(f"[{format_time(seg['start'])}] {seg['text'].strip()}\n")
+                f.write(seg["text"].strip() + "\n")
 
 
-# ----------------------------
-# Export SRT
-# ----------------------------
 def export_srt(parent, result):
     if not result:
         return
-    file_path, _ = QFileDialog.getSaveFileName(parent, "Save SRT", "", "SRT Files (*.srt)")
-    if file_path:
-        with open(file_path, "w", encoding="utf-8") as f:
+    path, _ = QFileDialog.getSaveFileName(parent, "Save SRT", "", "*.srt")
+    if path:
+        with open(path, "w", encoding="utf-8") as f:
             for i, seg in enumerate(result["segments"], 1):
-                start = format_srt_time(seg["start"])
-                end = format_srt_time(seg["end"])
-                f.write(f"{i}\n{start} --> {end}\n{seg['text'].strip()}\n\n")
+                f.write(f"{i}\n")
+                f.write(f"{format_srt_time(seg['start'])} --> {format_srt_time(seg['end'])}\n")
+                f.write(seg["text"].strip() + "\n\n")
 
 
-# ----------------------------
-# Save recording helper
-# ----------------------------
-def save_recording(data, samplerate, filename):
-    os.makedirs("recordings", exist_ok=True)
-    path = os.path.join("recordings", filename)
-    sf.write(path, data, samplerate)
-    return path
-
-
-# ----------------------------
-# Helper Functions
-# ----------------------------
 def format_time(seconds):
     mins = int(seconds // 60)
     secs = int(seconds % 60)
@@ -138,3 +101,11 @@ def format_srt_time(seconds):
     secs = int(seconds % 60)
     ms = int((seconds % 1) * 1000)
     return f"{hrs:02d}:{mins:02d}:{secs:02d},{ms:03d}"
+
+
+def save_recording(data, samplerate, filename):
+    folder = "recordings"
+    os.makedirs(folder, exist_ok=True)
+    path = os.path.join(folder, filename)
+    sf.write(path, data, samplerate)
+    return path
