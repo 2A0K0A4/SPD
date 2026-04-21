@@ -128,6 +128,7 @@ class App(QWidget):
 
         self.recording = False
         self.audio_data = []
+        self.selected_device = None
 
         layout = QHBoxLayout(self)
 
@@ -219,23 +220,51 @@ class App(QWidget):
 
         self.load_saved()
 
+    # 🎤 MIC SELECTION
+    def choose_microphone(self):
+        devices = sd.query_devices()
+        input_devices = [(i, d['name']) for i, d in enumerate(devices) if d['max_input_channels'] > 0]
+
+        if not input_devices:
+            QMessageBox.warning(self, "Error", "No microphones found")
+            return None
+
+        names = [name for i, name in input_devices]
+
+        choice, ok = QInputDialog.getItem(self, "Select Microphone", "Choose:", names, 0, False)
+
+        if ok:
+            for i, name in input_devices:
+                if name == choice:
+                    return i
+        return None
+
+    # FILE
     def pick_file(self):
         f, _ = QFileDialog.getOpenFileName(self, "Select", "", "*.wav *.mp3")
         if f:
             self.file = f
             self.file_btn.setText(os.path.basename(f))
 
+    # RECORD
     def toggle_record(self):
         if not self.recording:
+            self.selected_device = self.choose_microphone()
+            if self.selected_device is None:
+                return
+
             self.recording = True
             self.record_btn.setText("Stop")
             self.audio_data = []
+
             self.stream = sd.InputStream(
+                device=self.selected_device,
                 channels=1,
                 samplerate=44100,
                 callback=self.audio_callback
             )
             self.stream.start()
+
         else:
             self.recording = False
             self.record_btn.setText("Record")
@@ -253,6 +282,7 @@ class App(QWidget):
         if self.recording:
             self.audio_data.append(indata.copy())
 
+    # TRANSCRIBE
     def run_transcription(self):
         if not hasattr(self, "file"):
             QMessageBox.warning(self, "Error", "Select file first")
@@ -283,6 +313,7 @@ class App(QWidget):
         self.progress.hide()
         self.status_label.setText("Done ✅")
 
+    # SAVED
     def load_saved(self):
         for i in reversed(range(self.saved_layout.count())):
             w = self.saved_layout.itemAt(i).widget()
@@ -318,6 +349,7 @@ class App(QWidget):
             os.remove(path)
         self.load_saved()
 
+    # SAVE VOICE
     def save_voice(self):
         text = clean(self.output.toPlainText())
         if not text:

@@ -7,6 +7,9 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
 import soundfile as sf
 
+# Path to your fine-tuned model — place the unzipped best_model folder here
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "final-model")
+
 
 class TranscriptionWorker(QThread):
     progress = pyqtSignal(int)
@@ -23,28 +26,73 @@ class TranscriptionWorker(QThread):
             self.status.emit("Loading model...")
             self.progress.emit(10)
 
-            import whisper
             import torch
+            import numpy as np
+            from transformers import WhisperForConditionalGeneration, WhisperProcessor
 
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-            model = whisper.load_model("base", device=device)
+            # Use MPS on Apple Silicon, CUDA if available, else CPU
+            if torch.backends.mps.is_available():
+                device = torch.device("mps")
+            elif torch.cuda.is_available():
+                device = torch.device("cuda")
+            else:
+                device = torch.device("cpu")
+
+            processor = WhisperProcessor.from_pretrained(MODEL_PATH)
+            model = WhisperForConditionalGeneration.from_pretrained(MODEL_PATH)
+            model.to(device)
+            model.eval()
+
+            # Force English transcription
+            model.config.forced_decoder_ids = processor.get_decoder_prompt_ids(
+                language="english", task="transcribe"
+            )
+
+            self.status.emit("Loading audio...")
+            self.progress.emit(30)
+
+            # Load audio at 16kHz mono (required by Whisper)
+            audio, _ = librosa.load(self.file_path, sr=16000, mono=True)
 
             self.status.emit("Transcribing...")
-            self.progress.emit(40)
+            self.progress.emit(50)
 
-            result = model.transcribe(self.file_path, fp16=False)
+            # Process in 30-second chunks (Whisper's context window)
+            chunk_size = 16000 * 30  # 30 seconds
+            segments = []
+            total_chunks = max(1, len(audio) // chunk_size + 1)
 
-            formatted = {
-                "segments": [
-                    {"start": seg["start"], "end": seg["end"], "text": seg["text"]}
-                    for seg in result["segments"]
-                ]
-            }
+            for i, start in enumerate(range(0, len(audio), chunk_size)):
+                chunk = audio[start:start + chunk_size]
+
+                inputs = processor(
+                    chunk,
+                    sampling_rate=16000,
+                    return_tensors="pt"
+                )
+                input_features = inputs.input_features.to(device)
+
+                with torch.no_grad():
+                    generated_ids = model.generate(input_features)
+
+                text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+
+                start_sec = start / 16000
+                end_sec = min((start + chunk_size) / 16000, len(audio) / 16000)
+
+                if text.strip():
+                    segments.append({
+                        "start": start_sec,
+                        "end": end_sec,
+                        "text": text.strip()
+                    })
+
+                progress = 50 + int((i + 1) / total_chunks * 50)
+                self.progress.emit(progress)
 
             self.progress.emit(100)
             self.status.emit("Done")
-
-            self.finished.emit(formatted)
+            self.finished.emit({"segments": segments})
 
         except Exception as e:
             self.error.emit(str(e))
