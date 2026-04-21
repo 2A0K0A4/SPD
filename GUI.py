@@ -19,7 +19,6 @@ import pygame
 
 pygame.mixer.init()
 
-# ---------------- STYLE (UNCHANGED) ----------------
 STYLE = """
 QWidget {
     background-color: #0f0f10;
@@ -93,12 +92,10 @@ os.makedirs(VOICE_FOLDER, exist_ok=True)
 os.makedirs(RECORDINGS_FOLDER, exist_ok=True)
 
 
-# ---------------- TEXT CLEAN ----------------
 def clean(text):
     return re.sub(r"\[\d{2}:\d{2}.*?\]", "", text).strip()
 
 
-# ---------------- VOICE ENGINE (FIXED) ----------------
 async def generate_voice(text, path):
     tts = edge_tts.Communicate(text, VOICE)
     await tts.save(path)
@@ -116,13 +113,11 @@ def speak(text):
 
     asyncio.run(run())
 
-    # FIX: stop old sound so replay works
     pygame.mixer.music.stop()
     pygame.mixer.music.load(path)
     pygame.mixer.music.play()
 
 
-# ---------------- APP ----------------
 class App(QWidget):
     def __init__(self):
         super().__init__()
@@ -136,7 +131,7 @@ class App(QWidget):
 
         layout = QHBoxLayout(self)
 
-        # ---------------- LEFT ----------------
+        # LEFT
         left_box = QVBoxLayout()
         left_widget = QWidget()
         left_widget.setObjectName("sidebar")
@@ -153,7 +148,7 @@ class App(QWidget):
 
         layout.addWidget(left_widget)
 
-        # ---------------- CENTER ----------------
+        # CENTER
         center = QVBoxLayout()
 
         header = QLabel("AI Transcriber")
@@ -185,7 +180,6 @@ class App(QWidget):
         self.output = QTextEdit()
         center.addWidget(self.output)
 
-        # EXPORT
         export_layout = QHBoxLayout()
 
         txt_btn = QPushButton("Export TXT")
@@ -203,19 +197,19 @@ class App(QWidget):
 
         layout.addLayout(center)
 
-        # ---------------- RIGHT ----------------
+        # RIGHT
         right = QVBoxLayout()
 
-        voice_title = QLabel("Voice Tools")
+        voice_title = QLabel("Text to Speech")
         voice_title.setStyleSheet("font-size:18px;")
         right.addWidget(voice_title)
 
-        play_btn = QPushButton("Play Voice")
+        play_btn = QPushButton("Play")
         play_btn.setObjectName("ai")
         play_btn.clicked.connect(lambda: speak(self.output.toPlainText()))
         right.addWidget(play_btn)
 
-        save_btn = QPushButton("Save Voice")
+        save_btn = QPushButton("Save")
         save_btn.setObjectName("ai")
         save_btn.clicked.connect(self.save_voice)
         right.addWidget(save_btn)
@@ -225,14 +219,12 @@ class App(QWidget):
 
         self.load_saved()
 
-    # ---------------- FILE ----------------
     def pick_file(self):
         f, _ = QFileDialog.getOpenFileName(self, "Select", "", "*.wav *.mp3")
         if f:
             self.file = f
             self.file_btn.setText(os.path.basename(f))
 
-    # ---------------- RECORD ----------------
     def toggle_record(self):
         if not self.recording:
             self.recording = True
@@ -261,7 +253,6 @@ class App(QWidget):
         if self.recording:
             self.audio_data.append(indata.copy())
 
-    # ---------------- TRANSCRIBE ----------------
     def run_transcription(self):
         if not hasattr(self, "file"):
             QMessageBox.warning(self, "Error", "Select file first")
@@ -292,7 +283,6 @@ class App(QWidget):
         self.progress.hide()
         self.status_label.setText("Done ✅")
 
-    # ---------------- SAVED FILES ----------------
     def load_saved(self):
         for i in reversed(range(self.saved_layout.count())):
             w = self.saved_layout.itemAt(i).widget()
@@ -328,7 +318,6 @@ class App(QWidget):
             os.remove(path)
         self.load_saved()
 
-    # ---------------- SAVE VOICE ----------------
     def save_voice(self):
         text = clean(self.output.toPlainText())
         if not text:
