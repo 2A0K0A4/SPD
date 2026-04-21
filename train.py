@@ -30,6 +30,7 @@ from datetime import datetime
 from pathlib import Path
 
 import torch
+from torch.cuda.amp import autocast, GradScaler
 from transformers import (
     WhisperForConditionalGeneration,
     WhisperProcessor,
@@ -87,6 +88,8 @@ def parse_args():
     parser.add_argument("--num_workers", type=int,   default=2)
     parser.add_argument("--grad_accum",  type=int,   default=4,
                         help="Gradient accumulation steps (effective batch = batch_size * grad_accum)")
+    parser.add_argument("--fp16",        action="store_true", default=False,
+                        help="Use mixed precision (FP16) training for faster training")
 
     # Debug mode: uses only first 50 samples per split
     parser.add_argument("--debug", action="store_true",
@@ -114,7 +117,7 @@ def get_device():
 # ──────────────────────────────────────────────
 # TRAIN ONE EPOCH
 # ──────────────────────────────────────────────
-def train_epoch(model, loader, optimizer, scheduler, device, grad_accum, epoch):
+def train_epoch(model, loader, optimizer, scheduler, device, grad_accum, epoch, scaler=None, fp16=False):
     model.train()
     total_loss = 0.0
     optimizer.zero_grad()
@@ -123,16 +126,25 @@ def train_epoch(model, loader, optimizer, scheduler, device, grad_accum, epoch):
         input_features = batch["input_features"].to(device)  # [B, 80, 3000]
         labels         = batch["labels"].to(device)          # [B, seq_len]
 
-        outputs = model(
-            input_features=input_features,
-            labels=labels,
-        )
-        loss = outputs.loss / grad_accum
-        loss.backward()
+        with autocast(enabled=fp16):
+            outputs = model(
+                input_features=input_features,
+                labels=labels,
+            )
+            loss = outputs.loss / grad_accum
+
+        if scaler is not None:
+            scaler.scale(loss).backward()
+        else:
+            loss.backward()
 
         if (step + 1) % grad_accum == 0:
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            optimizer.step()
+            if scaler is not None:
+                scaler.step(optimizer)
+                scaler.update()
+            else:
+                optimizer.step()
             scheduler.step()
             optimizer.zero_grad()
 
@@ -225,6 +237,7 @@ def main():
     log.info(f"Batch size : {args.batch_size}  (grad_accum x{args.grad_accum})")
     log.info(f"Device     : {device}")
     log.info(f"Debug mode : {args.debug}")
+    log.info(f"FP16       : {args.fp16}")
     log.info("=" * 60)
 
     # ── Load processor and model ───────────────
@@ -278,6 +291,7 @@ def main():
     )
 
     # ── Training loop ──────────────────────────
+    scaler    = GradScaler() if args.fp16 and torch.cuda.is_available() else None
     best_wer  = float("inf")
     train_log = []
 
@@ -291,7 +305,8 @@ def main():
         # Train
         train_loss = train_epoch(
             model, train_loader, optimizer, scheduler,
-            device, args.grad_accum, epoch
+            device, args.grad_accum, epoch,
+            scaler=scaler, fp16=args.fp16
         )
         log.info(f"  Train loss: {train_loss:.4f}")
 
