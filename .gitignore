@@ -70,3 +70,4 @@ tests/results/
 *.wav
 *.mp3
 *.flac
+final-model/model.safetensors
